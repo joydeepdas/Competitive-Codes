@@ -1,0 +1,6 @@
+High-pass filter pulse response
+c1 in  out 5p
+r1 out 0 2meg
+vin in 0 pulse(0 1 1u 1u 30u)
+.tran .2u 60u
+.end

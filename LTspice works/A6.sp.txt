@@ -1,0 +1,6 @@
+voltage Divider
+r1 in out 100
+r2 out 0 200
+vin in 0 dc 1
+.dc vin -1 +1 2m
+.end

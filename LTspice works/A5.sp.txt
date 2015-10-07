@@ -1,0 +1,18 @@
+MY RLC Circuit
+
+l1 in out 20n
+
+r1 out mid 30
+
+c1 mid 0 1p
+
+*vin in 0 pulse(0 1 0 150p 150p 1)
+
+*.tran 25p 500p
+
+*Added next two lines for ac analysis.
+*1meg=10^6  1g=10^9
+vin in 0 ac 1
+.ac  dec 100 1meg 1g
+
+.end

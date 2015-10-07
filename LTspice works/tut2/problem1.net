@@ -1,0 +1,20 @@
+* C:\Users\JOYDEEP DAS\Desktop\codes\LTspice works\tut2\problem1.asc
+C1 N002 N001 1µF
+C2 0 N004 1µF
+XU2 N004 N002 NC_01 NC_02 vout LT1001
+R1 N004 N005 1k
+R2 N001 N004 1k
+R3 vout N005 1k
+R4 vout N002 1k
+R5 N003 vout 1k
+R6 0 N003 1k
+D1 N005 0 D
+D2 0 N005 D
+XU1 N003 N002 NC_03 NC_04 N001 LT1001
+V1 N005 0 PULSE(0 5 0 1ns 1ns 5ms 10ms 10)
+.model D D
+.lib C:\Program Files (x86)\LTC\LTspiceIV\lib\cmp\standard.dio
+.tran 100ms
+.lib LTC.lib
+.backanno
+.end
