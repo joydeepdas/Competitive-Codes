@@ -1,0 +1,53 @@
+
+int Solution::repeatedNumber(const vector<int> &A) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    //set<int> myset;
+    //int answer = -1;
+    int size = A.size() - 1;// size = n , arr size = n+ 1;
+    int sqrt_root = floor(sqrt(size));
+    int no_in_each_bin = floor(size/sqrt_root);
+    int last_num = size - sqrt_root * no_in_each_bin;
+    // 
+    int answer=0;
+    int arr[sqrt_root+1];
+    for( int i=0;i<=sqrt_root;i++){
+        arr[i] = 0;
+    }
+    for(int i=0;i<A.size();i++){
+        int value = (A[i]-1) / no_in_each_bin;
+        arr[value] += 1;
+        // extra 
+        if (value == sqrt_root && last_num!= 0){
+            if(arr[value] > last_num ){
+            answer = value;
+            break;
+        }
+        }
+        // regular
+        if(arr[value] > no_in_each_bin ){
+            answer = value;
+            break;
+        }
+    }
+    //return arr[4];
+    //cout<<answer<<endl;
+    set<int> arr1;
+    int lowest = answer * (no_in_each_bin),highest = (answer+1) * (no_in_each_bin);
+    for (int i = 0;i<A.size();i++){
+        if(A[i]<=highest && A[i] > lowest){
+            if (arr1.find(A[i])!= arr1.end()){
+                return A[i];
+            }
+            else{
+                arr1.insert(A[i]);
+            }
+            
+        }
+    }
+    return -1;
+    //return answer;
+}
+
