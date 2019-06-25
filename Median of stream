@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int n;
+	cin>>n;
+	int arr[n];
+	for(int i=0;i<n;i++){
+		cin>>arr[i];
+	}
+	
+	priority_queue<int> max_heap_left;
+	priority_queue<int, vector<int> , greater<int>>  min_heap_right;
+	max_heap_left.push(arr[0]);
+	for(int i=1;i<n;i++){
+		float median;
+		if((max_heap_left.size() + min_heap_right.size())%2==0){
+			int left_max = max_heap_left.top();
+			int right_min = min_heap_right.top();
+			median = (float)((float)(left_max) + (float)(right_min))/2;
+		}
+		else{
+			if(max_heap_left.size() > min_heap_right.size()){
+				median =  max_heap_left.top();
+			}
+			else{
+				median =  min_heap_right.top();
+			}
+		}
+		cout<<median<<" ";
+		if(arr[i]<=median){
+			if(max_heap_left.size() <= min_heap_right.size()){
+				max_heap_left.push(arr[i]);
+			}
+			else if(max_heap_left.size() > min_heap_right.size()){
+				int temp = max_heap_left.top();
+				max_heap_left.pop();
+				min_heap_right.push(temp);
+				max_heap_left.push(arr[i]);
+			}
+		}
+		else{
+			if(max_heap_left.size() >= min_heap_right.size()){
+				min_heap_right.push(arr[i]);
+			}
+			else if(max_heap_left.size() < min_heap_right.size()){
+				int temp = min_heap_right.top();
+				min_heap_right.pop();
+				max_heap_left.push(temp);
+				min_heap_right.push(arr[i]);
+			}
+		}
+	}
+}
