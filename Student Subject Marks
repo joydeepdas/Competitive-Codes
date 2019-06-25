@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+struct student_subject{
+	string student, subject;
+};
+bool operator<(const student_subject& t1, const student_subject& t2) 
+{ 
+    return (t1.student < t2.student); 
+} 
+int main() {
+	map< student_subject, vector<int> > mymap;
+	int n;
+	cin>>n;
+	string name,subj, check_name, check_subj;
+	int marks;
+	student_subject dummy_pair;
+	for(int i=0;i<n;i++){
+		cin>>name>>subj>>marks;
+		dummy_pair.student = name;
+		dummy_pair.subject = subj;
+		if( mymap.find(dummy_pair) == mymap.end()){
+			vector<int> dummy ;
+			dummy.push_back(marks);
+			mymap[dummy_pair] = dummy;
+		}
+		else{
+			vector<int> dummy = mymap[dummy_pair];
+			dummy.push_back(marks);
+			mymap[dummy_pair] = dummy;
+		}
+ 
+	}
+	cin>>check_name>>check_subj;
+	dummy_pair.student = check_name;
+	dummy_pair.subject = check_subj;
+	sort(mymap[dummy_pair].begin(),mymap[dummy_pair].end(),greater<int>());
+	for(int i=0;i<5;i++){
+		cout<<mymap[dummy_pair][i]<<" ";
+	}
+ 
+}
