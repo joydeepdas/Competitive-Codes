@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+void print(deque<int> dq){
+	for(auto it =dq.begin();it!=dq.end();it++){
+		cout<<(*it)<< " ";
+	}
+	cout<<endl;
+}
+int main() {
+	int n,k;
+	cin>>n>>k;
+	int arr[n];
+	for(int i=0;i<n;i++){
+		cin>>arr[i];
+	}
+	deque<int> dq;
+	map<int, deque<int>::iterator> mymap;
+	int num_add;
+	for(int i=0;i<n;i++){
+		num_add = arr[i];
+		if(mymap.find(num_add)==mymap.end()){
+			if(dq.size()==k){
+				int last = dq.back();
+				dq.pop_back();
+				mymap.erase(last);
+			} 
+		}
+		else{
+			dq.erase(mymap[num_add]);
+			
+		}
+			
+		dq.push_front(num_add);
+		mymap[num_add] = dq.begin();
+		
+		print(dq);
+	}
+	
+}
