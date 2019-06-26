@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int n;
+	cin>>n;
+	string s;
+	int marks;
+	map<string, vector<int> > mymap;
+	while(n--){
+		cin>>s>>marks;
+		if(mymap.find(s)==mymap.end()){
+			vector<int> dummy;
+			dummy.push_back(marks);
+			mymap[s] = dummy;
+		}
+		else{
+			vector<int> dummy= mymap[s];
+			dummy.push_back(marks);
+			mymap[s] = dummy;
+		}
+	}
+	map<string, vector<int>>::iterator itr;
+	string name;
+	int maxi=0;
+	for( itr=mymap.begin();itr!=mymap.end();itr++){
+		int average = 0;
+		string s = itr->first;
+		vector<int> dummy = mymap[s];
+		int size = dummy.size();
+		for(int i=0;i<dummy.size();i++){
+			average += dummy[i];
+		}
+		average = average/size;
+		if(average>maxi){
+			maxi = average;
+			name = s;
+		}
+	}
+	cout<<name<< " "<<maxi;
+}
